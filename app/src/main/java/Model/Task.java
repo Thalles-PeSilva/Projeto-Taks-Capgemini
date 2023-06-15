@@ -67,20 +67,20 @@ public class Task {
         this.description = description;
     }
 
-    public String getNots() {
-        return notes;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public void setNots(String nots) {
-        this.notes = nots;
+    public String getNotes() {
+        return notes;
     }
 
     public boolean isIsCompledted() {
         return isCompledted;
     }
 
-    public void setIsCompledted(boolean isCompledted) {
-        this.isCompledted = isCompledted;
+    public void setIsCompleted(boolean isCompledted) {
+        this.isCompledted=isCompledted;
     }
 
     public Date getDeadline() {

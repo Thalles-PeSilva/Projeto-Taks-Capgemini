@@ -108,11 +108,11 @@ public class ProjectController {
                 
                 Project project = new Project();
                 
-                project.setId(resultSet.getInt("id"));
+                project.setId(resultSet.getInt("idprojects"));
                 project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
                 project.setCreatedAt(resultSet.getDate("createdAt"));
-                project.setUpdatedAt(resultSet.getDate("updateddAt"));
+                 project.setUpdatedAt(resultSet.getDate("updatedAt"));
                 
                 // Adiciono o contato recuperado, a lista de contatos
                 projects.add(project);
