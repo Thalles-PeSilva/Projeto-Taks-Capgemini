@@ -14,6 +14,10 @@ public class Project {
     private String description;
     private Date createdAt;
     private Date updatedAt;
+    
+    public Project(){
+        
+    }
 
     public Project(int id, String name, String description, Date createdAt, Date updatedAt) {
         this.id = id;
