@@ -429,13 +429,20 @@ public class MainScreen extends javax.swing.JFrame {
         loadProjecs();
         
         tasksModel = new TaskTableModel();
-        jTableTasks.setModel(tasksModel);
-        loadTasks(1);
+        jTableTasks.setModel(tasksModel);   
+        //adicionar
+        if (!projectsModel.isEmpty()) {
+            jListProjects.setSelectedIndex(0);
+            int projectIndex = jListProjects.getSelectedIndex();
+            Project project = (Project) projectsModel.get(projectIndex);
+            loadTasks(project.getId());//vai carregar as tarefas de acordo com id do projeto selecionado
+        }
     }
     
     public void loadTasks(int idProject){
         List<Task> tasks = taskController.getAll(idProject);
         tasksModel.setTasks(tasks);
+        showJTableTasks(!tasks.isEmpty());
     }
     
     public void loadProjecs() throws SQLException{
@@ -447,6 +454,10 @@ public class MainScreen extends javax.swing.JFrame {
             projectsModel.addElement(project);
         }
         jListProjects.setModel(projectsModel);
+        
+    }
+
+    private void showJTableTasks(boolean hasTasks) {
         
     }
 

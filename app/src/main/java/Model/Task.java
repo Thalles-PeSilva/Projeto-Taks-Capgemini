@@ -14,18 +14,21 @@ public class Task {
     private String name;
     private String description;
     private String notes;
-    private boolean isCompledted;
+    private boolean isCompleted;
     private Date deadline;
     private Date createdAt;
     private Date updatedAt;
+    
+   
+    
 
-    public Task(int id, int idProject, String name, String description, String notes, boolean isCompledted, Date deadline, Date createdAt, Date updatedAt) {
+    public Task(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Date createdAt, Date updatedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
         this.description = description;
         this.notes = notes;
-        this.isCompledted = isCompledted;
+        this.isCompleted = isCompleted;
         this.deadline = deadline;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -33,6 +36,8 @@ public class Task {
     
     public Task(){
         this.createdAt = new Date();
+        this.updatedAt = new Date(); // caso não resolva, remover essa linha
+        
     }
 
     public int getId() {
@@ -75,12 +80,12 @@ public class Task {
         return notes;
     }
 
-    public boolean isIsCompledted() {
-        return isCompledted;
+    public boolean isIsCompleted() {
+        return isCompleted;
     }
 
-    public void setIsCompleted(boolean isCompledted) {
-        this.isCompledted=isCompledted;
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public Date getDeadline() {
@@ -109,6 +114,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", nots=" + notes + ", isCompledted=" + isCompledted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+        return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", nots=" + notes + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
+    
+    
+ 
 }

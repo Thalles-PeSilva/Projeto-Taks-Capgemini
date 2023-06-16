@@ -4,7 +4,12 @@
 package Main;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+
+import Model.Project;
+import controler.ProjectController;
+import controler.TaskController;
 import util.ConnectionFactory;
 
 
@@ -12,17 +17,23 @@ public class Main {
     
 
     public static void main(String[] args) throws SQLException {
-        
-  
-        
-    System.out.println(new Main().getGreeting());
 
-    Connection c = ConnectionFactory.getConnection();
 
-    ConnectionFactory.closeConnection(c);
-        }
+        ProjectController projetoController = new ProjectController();
+        Project project = new Project();
 
-    private boolean getGreeting() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Connection c = ConnectionFactory.getConnection();
+
+        /* Cadastrando uma tarefa - informando os dados*/
+        project.setName("Sistema X");
+        project.setDescription("Estudo de caso Sistema X");
+
+
+
+        /*Passando */
+        projetoController.save(project);
     }
+
+
 }
+

@@ -33,11 +33,11 @@ public class TaskController {
             statement.setInt(1, task.getIdProject());
             statement.setString(2, task.getName());
             statement.setString(3, task.getDescription());
-            statement.setBoolean(4, task.isIsCompledted());
+            statement.setBoolean(4, task.isIsCompleted());
             statement.setString(5, task.getNotes());
             statement.setDate(6, new Date(task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
-            statement.setDate(9, new Date(task.getUpdatedAt().getTime()));
+            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
             statement.execute();
         } catch (Exception ex) {
             throw new RuntimeException("Erro ao salvar a tarefa " + ex.getMessage(), ex);
@@ -65,7 +65,7 @@ public class TaskController {
             statement.setString(2, task.getName());
             statement.setString(3, task.getDescription());
             statement.setString(4, task.getNotes());
-            statement.setBoolean(5, task.isIsCompledted());
+            statement.setBoolean(5, task.isIsCompleted());
             statement.setDate(6, new Date(task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
             statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
@@ -145,6 +145,52 @@ public class TaskController {
             }
             
             
+        } catch (Exception ex) {
+            throw new RuntimeException("Erro ao inserir a tarefa" + ex.getMessage(), ex);
+        } finally {
+            ConnectionFactory.closeConnection(connection, statement, resultSet);
+        }
+        // Lista de tarefas que foi criada e carregada do banco de dados
+        return tasks;
+    }
+        public List<Task> getFindTaskByIdprojec(int idProject){
+
+        String sql = "SELECT * FROM task WHERE idProject = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        // Lista de tarefas que ser? devolvida quando a chamada do m?todo acontecer
+        List<Task> tasks = new ArrayList<Task> ();
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement(sql);
+
+            // Setando o valor que corrende ao filtro de busca
+            statement.setInt(1, idProject);
+
+            // Valor retornado pela execu??o da query
+            resultSet = statement.executeQuery();
+
+            // Enquanto houverem valores a serem percorrido no menu resultSet
+            while(resultSet.next()){
+                Task task = new Task();
+                task.setId(resultSet.getInt("id"));
+                task.setIdProject(resultSet.getInt("idProject"));
+                task.setName(resultSet.getString("name"));
+                task.setDescription(resultSet.getString("description"));
+                task.setNotes(resultSet.getString("notes"));
+                task.setIsCompleted(resultSet.getBoolean("completed"));
+                task.setDeadline(resultSet.getDate("deadline"));
+                task.setCreatedAt(resultSet.getDate("createdAt"));
+                task.setUpdatedAt(resultSet.getDate("updatedAt"));
+
+                tasks.add(task);
+            }
+
+
         } catch (Exception ex) {
             throw new RuntimeException("Erro ao inserir a tarefa" + ex.getMessage(), ex);
         } finally {

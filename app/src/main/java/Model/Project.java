@@ -16,8 +16,7 @@ public class Project {
     private Date updatedAt;
     
     public Project(){
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
+    this.createdAt = new Date();
     }
 
     public Project(int id, String name, String description, Date createdAt, Date updatedAt) {

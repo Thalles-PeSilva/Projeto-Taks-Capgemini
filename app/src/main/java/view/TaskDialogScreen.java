@@ -116,7 +116,7 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         jTextAreaNotes.setRows(5);
         jScrollPaneNotes.setViewportView(jTextAreaNotes);
 
-        jFormattedTextFielddeadline.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        jFormattedTextFielddeadline.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         jFormattedTextFielddeadline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFielddeadlineActionPerformed(evt);
@@ -192,14 +192,14 @@ public class TaskDialogScreen extends javax.swing.JDialog {
         
         try {
             Task task = new Task();
-            task.setIdProject(project.getId());
+            task.setIdProject(1);
             
             task.setName(jTextFieldName.getName());
             task.setDescription(jTextAreaDescription.getText());
             task.setNotes(jTextAreaNotes.getText());
             task.setIsCompleted(false);
             
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
             Date deadline = null;
             
             deadline = dateFormat.parse(jFormattedTextFielddeadline.getText());
@@ -211,8 +211,8 @@ public class TaskDialogScreen extends javax.swing.JDialog {
             
             
             
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         } 
         
         this.dispose();

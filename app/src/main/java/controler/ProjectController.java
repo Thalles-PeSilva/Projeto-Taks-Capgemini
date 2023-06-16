@@ -24,7 +24,7 @@ public class ProjectController {
     
     public void save(Project project) throws SQLException{
        
-        String sql = "INSERT INTO projects(name, description, createdAt, updateAt) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO projects(name, description, createdAt) VALUES (?, ?, ?)";
         
         Connection connection = null;
         PreparedStatement statement = null;
@@ -38,7 +38,8 @@ public class ProjectController {
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
             statement.setDate(3, new Date(project.getCreatedAt().getTime()));
-            statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
+            
+            
             
             // Executa a sql para inserção dos dados
                 statement.execute();
@@ -56,7 +57,6 @@ public class ProjectController {
         String sql = "UPDATE projects SET"
                 + "name = ?, "
                 + "description = ?, "
-                + "createdAt = ?, "
                 + "updateAt = ?, "
                 + "WHERE id = ? ";
         
@@ -71,9 +71,9 @@ public class ProjectController {
             
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
-            statement.setDate(3, new Date(project.getCreatedAt().getTime()));
-            statement.setDate(4, new Date(project.getUpdatedAt().getTime()));
-            statement.setInt(5, project.getId());
+            
+            statement.setDate(3, new Date(project.getUpdatedAt().getTime()));
+            statement.setInt(4, project.getId());
             
             // Executa a sql para inserção de dados
             statement.execute();
