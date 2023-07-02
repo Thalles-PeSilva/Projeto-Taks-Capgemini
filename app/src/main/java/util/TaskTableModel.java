@@ -5,6 +5,7 @@
 package util;
 
 import Model.Task;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -32,6 +33,19 @@ public class TaskTableModel extends AbstractTableModel{
     public String getColumnName(int columnIndex){
         return columns[columnIndex];
     }
+    
+    public boolean isCellEditable(int rowIndex, int columnIndex){
+        
+        return columnIndex == 3; 
+    }
+    
+    @Override 
+    public Class<?> getColumnClass(int columnIndex){
+        if(tasks.isEmpty()){
+            return Object.class;
+        }
+        return this.getValueAt(0, columnIndex).getClass();
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -43,7 +57,8 @@ public class TaskTableModel extends AbstractTableModel{
                     return tasks.get(rowIndex).getDescription();
                 
             case 2:
-                    return tasks.get(rowIndex).getDeadline();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd//MM/yyyy");
+                    return dateFormat.format(tasks.get(rowIndex).getDeadline());
                 
             case 3:
                     return tasks.get(rowIndex).isIsCompleted();
@@ -58,6 +73,11 @@ public class TaskTableModel extends AbstractTableModel{
                 return "Dados não encontrados";
                       
         }
+    }
+    
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex){
+       tasks.get(rowIndex).setIsCompleted((boolean) aValue);
     }
 
     public String[] getColumns() {
